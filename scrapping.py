@@ -37,7 +37,9 @@ qtd = qtd_itens[:index]
 ultima_pagina = math.ceil(int(qtd)/20)
 dic_produtos = {
     'marca': [],
-    'preco': []
+    'preco': [],
+    'preco_old': [],
+    'preco_cond_avista': []
 }
 
 for i in range(1, ultima_pagina+1):
@@ -51,10 +53,16 @@ for i in range(1, ultima_pagina+1):
             'nameCard')).get_text().strip())
         preco = produto.find('span', class_=re.compile(
             'priceCard')).get_text().strip()
+        preco_old = produto.find('span', class_=re.compile(
+            'oldPriceCard')).get_text().strip()
+        preco_avista = produto.find('span', class_=re.compile(
+            'priceTextCard')).get_text().strip()
         # print(marca, preco)
 
         dic_produtos['marca'].append(marca)
         dic_produtos['preco'].append(preco)
+        dic_produtos['preco_old'].append(preco_old)
+        dic_produtos['preco_cond_avista'].append(preco_avista)
         # print(preco)
 
     # print(url_pag)
